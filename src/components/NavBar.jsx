@@ -11,11 +11,16 @@ import Button from "@mui/material/Button";
 import MenuItem from "@mui/material/MenuItem";
 import PaddingIcon from "@mui/icons-material/Padding";
 import Cart from "./CartWidget";
+import { Link } from "react-router-dom";
 
-const pages = ["Inicio", "Servicios", "Contacto"];
+/*
+	* Estas importaciones capaz se puedan resumir exportandolas desde la Raiz de mui y simplificando lineas. Fijate eso!
+			!	import { Box } from "@mui/system";
+	*/
 
 function NavBar() {
 	const [anchorElNav, setAnchorElNav] = React.useState(null);
+	const pages = ["Inicio", "Servicios", "Contacto"]; //* Mejor definir las paginas dentro del componente
 
 	const handleOpenNavMenu = (event) => {
 		setAnchorElNav(event.currentTarget);
@@ -33,18 +38,21 @@ function NavBar() {
 					<Typography
 						variant="h4"
 						noWrap
-						component="a"
-						href="/"
 						sx={{
 							mr: 2,
 							display: { xs: "none", md: "flex" },
-							fontFamily: "monospace",
-							fontWeight: 700,
-							letterSpacing: ".3rem",
-							color: "#fff",
-							textDecoration: "none",
 						}}>
-						JCompany
+						<Link
+							style={{
+								color: "white",
+								fontFamily: "monospace",
+								fontWeight: 700,
+								letterSpacing: ".3rem",
+								textDecoration: "none",
+							}}
+							to={"/"}>
+							JCompany
+						</Link>
 					</Typography>
 
 					<Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
@@ -85,19 +93,22 @@ function NavBar() {
 					<Typography
 						variant="h5"
 						noWrap
-						component="a"
-						href=""
 						sx={{
 							mr: 2,
 							display: { xs: "flex", md: "none" },
 							flexGrow: 1,
-							fontFamily: "monospace",
-							fontWeight: 700,
-							letterSpacing: ".3rem",
-							color: "inherit",
-							textDecoration: "none",
 						}}>
-						JCompany
+						<Link
+							style={{
+								color: "white",
+								fontFamily: "monospace",
+								fontWeight: 700,
+								letterSpacing: ".3rem",
+								textDecoration: "none",
+							}}
+							to={"/"}>
+							JCompany
+						</Link>
 					</Typography>
 					<Box
 						sx={{
