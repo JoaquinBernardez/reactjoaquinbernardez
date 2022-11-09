@@ -11,7 +11,6 @@ import Button from "@mui/material/Button";
 import MenuItem from "@mui/material/MenuItem";
 import PaddingIcon from "@mui/icons-material/Padding";
 import Cart from "./CartWidget";
-import { Link } from "react-router-dom";
 
 const pages = ["Inicio", "Servicios", "Contacto"];
 

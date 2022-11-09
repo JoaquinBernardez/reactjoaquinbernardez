@@ -1,6 +1,18 @@
 export const misProductos = [
-	{ id: 1, nombre: "Pad1", categoria: "Electronica", precio: 150 },
-	{ id: 2, nombre: "Pad2", categoria: "Electronica", precio: 150 },
+	{
+		id: 1,
+		nombre: "Pad1",
+		categoria: "Electronica",
+		precio: 150,
+		/* 		imagen: "pad2.webp", */
+	},
+	{
+		id: 2,
+		nombre: "Pad2",
+		categoria: "Electronica",
+		precio: 150,
+		/* 		imagen: "./images/pad3.webp", */
+	},
 	{ id: 3, nombre: "Pantalon", categoria: "Deportes", precio: 100 },
 	{ id: 4, nombre: "Remera", categoria: "Deportes", precio: 200 },
 	{

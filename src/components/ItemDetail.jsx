@@ -2,8 +2,23 @@ import React from "react";
 
 export default function ItemDetail({ producto }) {
 	return (
-		<div style={{ background: "#fafafa", margin: "1rem" }}>
-			{producto.id ? <h3>{producto.nombre}</h3> : <p>Cargando</p>}
+		<div
+			style={{
+				textAlign: "center",
+			}}>
+			{producto.id ? (
+				<>
+					Producto: {producto.nombre}
+					<br />
+					Categoria: {producto.categoria}
+					<br />
+					Precio: {producto.precio}
+					{/* 					<br />
+					{producto.imagen} */}
+				</>
+			) : (
+				<p>Cargando tu producto...</p>
+			)}
 		</div>
 	);
 }

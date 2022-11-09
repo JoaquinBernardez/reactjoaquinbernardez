@@ -22,7 +22,12 @@ export default function ItemDetailContainer() {
 	}, [iditem]);
 
 	return (
-		<div style={{ border: "2px solid black", margin: "10px" }}>
+		<div
+			style={{
+				border: "2px solid black",
+				margin: "1rem auto",
+				padding: "1rem",
+			}}>
 			<ItemDetail producto={producto} />
 		</div>
 	);

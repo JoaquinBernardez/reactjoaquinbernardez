@@ -1,10 +1,9 @@
 import * as React from "react";
 import { Box } from "@mui/system";
-import { Typography } from "@mui/material";
 import { useEffect } from "react";
 import { useState } from "react";
+import { useParams } from "react-router-dom";
 import { misProductos } from "./productos";
-import { Link, useParams } from "react-router-dom";
 import ItemList from "./ItemList";
 
 export default function ItemListContainer() {

@@ -6,7 +6,7 @@ export default function Item({ item }) {
 		<div style={{ background: "#fafafa", margin: "1rem" }} key={item.id}>
 			<p>{item.nombre}</p>
 
-			<Link to={"/item/" + item.id}>Ir al item</Link>
+			<Link to={"/item/" + item.id}>Ir al producto</Link>
 		</div>
 	);
 }

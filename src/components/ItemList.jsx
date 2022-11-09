@@ -5,11 +5,10 @@ export default function ItemList({ productos }) {
 	return (
 		<div
 			style={{
-				border: "3px solid skyblue",
+				border: "3px solid ",
 				margin: "10px",
-				boxShadow: "0px 5px 20px #666",
 			}}>
-			{!productos.length && "Cargando"}
+			{!productos.length && "Cargando productos..."}
 			{productos.map((item) => (
 				<Item item={item} />
 			))}
