@@ -1,4 +1,5 @@
 import React from "react";
+import ItemCounter from "./ItemCounter";
 
 export default function ItemDetail({ producto }) {
 	return (
@@ -15,6 +16,7 @@ export default function ItemDetail({ producto }) {
 					Precio: {producto.precio}
 					{/* 					<br />
 					{producto.imagen} */}
+					<ItemCounter stock={producto.stock} initial={1} />
 				</>
 			) : (
 				<p>Cargando tu producto...</p>

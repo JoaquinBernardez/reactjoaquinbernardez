@@ -11,8 +11,15 @@ import Button from "@mui/material/Button";
 import MenuItem from "@mui/material/MenuItem";
 import PaddingIcon from "@mui/icons-material/Padding";
 import Cart from "./CartWidget";
+import { Link } from "react-router-dom";
 
-const pages = ["Inicio", "Servicios", "Contacto"];
+const pages = [
+	{ label: "Home", link: "/" },
+	{ label: "Servicios", link: "/servicios" },
+	{ label: "Contacto", link: "/contacto" },
+	{ label: "Deportes", link: "/categoria/Deportes" },
+	{ label: "Electronica", link: "/categoria/Electronica" },
+];
 
 function NavBar() {
 	const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -75,8 +82,10 @@ function NavBar() {
 								display: { xs: "block", md: "none" },
 							}}>
 							{pages.map((page) => (
-								<MenuItem key={page} onClick={handleCloseNavMenu}>
-									<Typography textAlign="center">{page}</Typography>
+								<MenuItem key={page.label} onClick={handleCloseNavMenu}>
+									<Typography textAlign="center">
+										<Link to={page.link}>{page.label}</Link>
+									</Typography>
 								</MenuItem>
 							))}
 						</Menu>
@@ -111,10 +120,10 @@ function NavBar() {
 						}}>
 						{pages.map((page) => (
 							<Button
-								key={page}
+								key={page.label}
 								onClick={handleCloseNavMenu}
 								sx={{ my: 2, color: "white", display: "block" }}>
-								{page}
+								<Link to={page.link}>{page.label}</Link>
 							</Button>
 						))}
 					</Box>
