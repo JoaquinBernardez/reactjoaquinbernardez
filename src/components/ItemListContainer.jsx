@@ -46,6 +46,7 @@ export default function ItemListContainer() {
 		<Container
 			sx={{
 				height: "80vh",
+				width: "100vw",
 				display: "flex",
 				alignItems: "center",
 				justifyContent: "center",

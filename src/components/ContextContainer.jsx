@@ -1,9 +1,10 @@
-import React, { useState, createContext } from "react";
+import React, { useState, createContext, useEffect } from "react";
 
 export const contextoGeneral = createContext();
 
 export default function ContextContainer({ children }) {
 	const [carrito, setCarrito] = useState([]);
+	const [totalAPagar, setTotalApagar] = useState(0);
 	function posInCart(id) {
 		const pos = carrito.findIndex((item) => item.id == id);
 		return pos;
@@ -29,8 +30,17 @@ export default function ContextContainer({ children }) {
 		setCarrito([]);
 	}
 
+	useEffect(() => {
+		const tot = carrito.reduce(
+			(acc, item) => acc + item.quantity * item.precio,
+			0
+		);
+		setTotalApagar(tot);
+	}, [carrito]);
+
 	return (
-		<contextoGeneral.Provider value={{ carrito, addItem, removeItem, clear }}>
+		<contextoGeneral.Provider
+			value={{ carrito, addItem, removeItem, clear, totalAPagar }}>
 			{children}
 		</contextoGeneral.Provider>
 	);

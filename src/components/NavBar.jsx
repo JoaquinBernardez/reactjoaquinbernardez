@@ -11,17 +11,24 @@ import Button from "@mui/material/Button";
 import MenuItem from "@mui/material/MenuItem";
 import PaddingIcon from "@mui/icons-material/Padding";
 import Cart from "./CartWidget";
+import { contextoGeneral } from "../components/ContextContainer";
 import { Link } from "react-router-dom";
 
 const pages = [
 	{ label: "Home", link: "/" },
 	{ label: "Servicios", link: "/servicios" },
-	{ label: "Contacto", link: "/contacto" },
+	{ label: "Checkout", link: "/checkout" },
 	{ label: "Deportes", link: "/categoria/Deportes" },
 	{ label: "Electronica", link: "/categoria/Electronica" },
 ];
 
 function NavBar() {
+	const { carrito } = React.useContext(contextoGeneral);
+	const [cant, setCant] = React.useState(0);
+	React.useEffect(() => {
+		setCant(carrito.reduce((acc, item) => acc + item.quantity, 0));
+	}, [carrito]);
+
 	const [anchorElNav, setAnchorElNav] = React.useState(null);
 
 	const handleOpenNavMenu = (event) => {
@@ -128,7 +135,7 @@ function NavBar() {
 					</Box>
 
 					<Box sx={{ flexGrow: 0 }}>
-						<Cart />
+						<Cart cant={cant} />
 					</Box>
 				</Toolbar>
 			</Container>

@@ -1,5 +1,5 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Contacto from "./components/Contacto";
+import Checkout from "./components/Checkout";
 import Footer from "./components/Footer";
 import ItemDetailContainer from "./components/ItemDetailContainer";
 import ItemListContainer from "./components/ItemListContainer";
@@ -16,7 +16,7 @@ function App() {
 					<Routes>
 						<Route path="/" element={<ItemListContainer />} />
 						<Route path="/servicios" element={<Servicios />} />
-						<Route path="/contacto" element={<Contacto />} />
+						<Route path="/Checkout" element={<Checkout />} />
 						<Route
 							path="/categoria/:idcategoria"
 							element={<ItemListContainer />}

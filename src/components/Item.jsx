@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import ItemCounter from "./ItemCounter";
 import { contextoGeneral } from "./ContextContainer";
 import { useContext } from "react";
-import { doc, getDoc, getFirestore } from "firebase/firestore";
+
 export default function Item({ item }) {
 	const { addItem } = useContext(contextoGeneral);
 
@@ -14,7 +14,6 @@ export default function Item({ item }) {
 		<div
 			style={{
 				background: "#fafafa",
-				margin: "1rem",
 				textAlign: "center",
 			}}
 			key={item.id}>

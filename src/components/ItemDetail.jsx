@@ -3,7 +3,7 @@ import ItemCounter from "./ItemCounter";
 import { contextoGeneral } from "./ContextContainer";
 
 export default function ItemDetail({ producto }) {
-	const { carrito, addItem } = useContext(contextoGeneral);
+	const { addItem } = useContext(contextoGeneral);
 	function agregarAlCarrito(cant) {
 		addItem(producto, cant);
 	}

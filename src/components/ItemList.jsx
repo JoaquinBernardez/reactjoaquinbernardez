@@ -6,7 +6,7 @@ export default function ItemList({ productos }) {
 		<div
 			style={{
 				border: "3px solid ",
-				margin: "10px",
+				margin: "2rem",
 				display: "flex",
 			}}>
 			{!productos.length && "Cargando productos..."}
