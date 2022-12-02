@@ -1,6 +1,7 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
+import { doc, getDoc, getFirestore } from "firebase/firestore";
 import ItemDetail from "./ItemDetail";
 import { misProductos } from "./productos";
 
@@ -10,14 +11,12 @@ export default function ItemDetailContainer() {
 	const [producto, setProducto] = useState({});
 
 	useEffect(() => {
-		const productoPromise = new Promise((res, rej) => {
-			setTimeout(() => {
-				res(misProductos.find((item) => item.id == iditem));
-			}, 2000);
-		});
+		const db = getFirestore();
 
-		productoPromise.then((res) => {
-			setProducto(res);
+		let docSinNorm = doc(db, "productos", iditem);
+
+		getDoc(docSinNorm).then((item) => {
+			setProducto({ id: item.id, ...item.data() });
 		});
 	}, [iditem]);
 

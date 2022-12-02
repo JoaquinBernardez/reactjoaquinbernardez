@@ -1,7 +1,13 @@
-import React from "react";
+import React, { useContext } from "react";
 import ItemCounter from "./ItemCounter";
+import { contextoGeneral } from "./ContextContainer";
 
 export default function ItemDetail({ producto }) {
+	const { carrito, addItem } = useContext(contextoGeneral);
+	function agregarAlCarrito(cant) {
+		addItem(producto, cant);
+	}
+
 	return (
 		<div
 			style={{
@@ -14,9 +20,11 @@ export default function ItemDetail({ producto }) {
 					Categoria: {producto.categoria}
 					<br />
 					Precio: {producto.precio}
-					{/* 					<br />
-					{producto.imagen} */}
-					<ItemCounter stock={producto.stock} initial={1} />
+					<ItemCounter
+						stock={producto.stock}
+						initial={1}
+						agregarAlCarrito={agregarAlCarrito}
+					/>
 				</>
 			) : (
 				<p>Cargando tu producto...</p>

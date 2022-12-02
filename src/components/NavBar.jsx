@@ -49,7 +49,6 @@ function NavBar() {
 							fontWeight: 700,
 							letterSpacing: ".3rem",
 							color: "#fff",
-							textDecoration: "none",
 						}}>
 						JCompany
 					</Typography>

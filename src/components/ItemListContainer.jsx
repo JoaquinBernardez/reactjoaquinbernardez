@@ -3,34 +3,63 @@ import { Box } from "@mui/system";
 import { useEffect } from "react";
 import { useState } from "react";
 import { useParams } from "react-router-dom";
-import { misProductos } from "./productos";
+import { Container } from "@mui/material";
 import ItemList from "./ItemList";
+import {
+	getFirestore,
+	collection,
+	getDocs,
+	query,
+	where,
+} from "firebase/firestore";
 
 export default function ItemListContainer() {
 	const { idcategoria } = useParams();
 	const [productos, setProductos] = useState([]);
 	useEffect(() => {
-		const productosPromise = new Promise((res, rej) => {
-			setTimeout(() => {
-				res(misProductos);
-			}, 2000);
-		});
-		productosPromise.then((res) => {
-			if (idcategoria) {
-				setProductos(res.filter((item) => idcategoria === item.categoria));
-			} else {
-				setProductos(res);
-			}
-		});
-	});
+		const db = getFirestore();
+		let productos;
+		if (idcategoria) {
+			productos = query(
+				collection(db, "Productos"),
+				where("categoria", "==", idcategoria)
+			);
+		} else {
+			productos = collection(db, "Productos");
+		}
 
+		getDocs(productos).then((res) => {
+			const arrayNorm = res.docs.map((element) => {
+				return {
+					id: element.id,
+					nombre: element.data().nombre,
+					categoria: element.data().categoria,
+					precio: element.data().precio,
+					stock: element.data().stock,
+				};
+			});
+
+			setProductos(arrayNorm);
+		});
+	}, [idcategoria]);
 	return (
-		<Box
+		<Container
 			sx={{
-				textAlign: "center",
-				boxShadow: "0px 5px 20px #666",
+				height: "80vh",
+				display: "flex",
+				alignItems: "center",
+				justifyContent: "center",
 			}}>
-			<ItemList productos={productos} />
-		</Box>
+			<Box
+				padding="3rem"
+				sx={{
+					display: "flex",
+					flexDirection: "column",
+					alignItems: "center",
+					boxShadow: "0px 0px 10px #999",
+				}}>
+				<ItemList productos={productos} />
+			</Box>
+		</Container>
 	);
 }

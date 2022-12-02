@@ -7,6 +7,7 @@ export default function ItemList({ productos }) {
 			style={{
 				border: "3px solid ",
 				margin: "10px",
+				display: "flex",
 			}}>
 			{!productos.length && "Cargando productos..."}
 			{productos.map((item) => (

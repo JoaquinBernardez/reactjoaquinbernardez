@@ -1,5 +1,4 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import "./App.css";
 import Contacto from "./components/Contacto";
 import Footer from "./components/Footer";
 import ItemDetailContainer from "./components/ItemDetailContainer";
