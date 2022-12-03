@@ -36,6 +36,7 @@ export default function ItemListContainer() {
 					categoria: element.data().categoria,
 					precio: element.data().precio,
 					stock: element.data().stock,
+					imgUrl: element.data().imgUrl,
 				};
 			});
 
@@ -56,7 +57,9 @@ export default function ItemListContainer() {
 				sx={{
 					display: "flex",
 					flexDirection: "column",
+					justifyContent: "center",
 					alignItems: "center",
+					width: "100%",
 					boxShadow: "0px 0px 10px #999",
 				}}>
 				<ItemList productos={productos} />

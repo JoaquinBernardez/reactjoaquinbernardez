@@ -1,13 +1,26 @@
+import { Button, TextField } from "@mui/material";
 import React, { useContext } from "react";
+import { useEffect } from "react";
 import { useState } from "react";
 import { contextoGeneral } from "./ContextContainer";
+import ItemCarrito from "./ItemCarrito";
 
 export default function Checkout() {
 	const { carrito, totalAPagar } = useContext(contextoGeneral);
+	const [nombresProductos, setNombresProductos] = useState([]);
 	const [nombre, setNombre] = useState("");
 	const [tel, setTel] = useState("");
 	const [email, setEmail] = useState("");
+
+	function cambioDeNombre() {
+		let nombres = carrito.map((item) => item.nombre);
+		setNombresProductos(nombres);
+	}
+	useEffect(() => {
+		cambioDeNombre();
+	}, [carrito]);
 	function botonComprar() {
+		cambioDeNombre();
 		alert(
 			nombre +
 				" " +
@@ -15,37 +28,48 @@ export default function Checkout() {
 				" " +
 				email +
 				" quiere comprar " +
-				JSON.stringify(carrito) +
-				"total a pagar" +
+				nombresProductos +
+				" total a pagar $" +
 				totalAPagar
 		);
 	}
 	return (
-		<div>
-			<div>
-				{carrito.map((item) => (
-					<p>{item.nombre + "" + item.precio + "" + item.quantity}</p>
-				))}
-				{JSON.stringify(carrito)}
+		<div
+			style={{
+				display: "flex",
+				flexDirection: "column",
+				alignItems: "center",
+			}}>
+			<div style={{ display: "flex" }}>
+				<ItemCarrito />
 			</div>
-			<div>Total a pagar:{totalAPagar}</div>
+			<div>Total a pagar: ${totalAPagar} </div>
 			<div>
-				<input
-					placeholder="nombre"
-					value={nombre}
+				<TextField
 					onChange={(e) => setNombre(e.target.value)}
+					id="filled-basic"
+					label="nombre"
+					variant="filled"
+					value={nombre}
 				/>
-				<input
-					placeholder="tel"
-					value={tel}
+				<TextField
 					onChange={(e) => setTel(e.target.value)}
+					id="filled-basic"
+					label="tel"
+					variant="filled"
+					value={tel}
 				/>
-				<input
-					placeholder="email"
-					value={email}
+
+				<TextField
 					onChange={(e) => setEmail(e.target.value)}
+					id="filled-basic"
+					label="email"
+					variant="filled"
+					value={email}
 				/>
-				<input type="button" onClick={botonComprar} value="Buy" />
+				<Button onClick={botonComprar} value="Buy" variant="contained">
+					Buy
+				</Button>
 			</div>
 		</div>
 	);

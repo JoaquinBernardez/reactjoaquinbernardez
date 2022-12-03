@@ -15,6 +15,7 @@ export default function Item({ item }) {
 			style={{
 				background: "#fafafa",
 				textAlign: "center",
+				padding: "1rem",
 			}}
 			key={item.id}>
 			<p>{item.nombre}</p>

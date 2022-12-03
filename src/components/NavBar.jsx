@@ -17,7 +17,6 @@ import { Link } from "react-router-dom";
 const pages = [
 	{ label: "Home", link: "/" },
 	{ label: "Servicios", link: "/servicios" },
-	{ label: "Checkout", link: "/checkout" },
 	{ label: "Deportes", link: "/categoria/Deportes" },
 	{ label: "Electronica", link: "/categoria/Electronica" },
 ];
@@ -90,7 +89,11 @@ function NavBar() {
 							{pages.map((page) => (
 								<MenuItem key={page.label} onClick={handleCloseNavMenu}>
 									<Typography textAlign="center">
-										<Link to={page.link}>{page.label}</Link>
+										<Link
+											style={{ color: "white", textDecoration: "none" }}
+											to={page.link}>
+											{page.label}
+										</Link>
 									</Typography>
 								</MenuItem>
 							))}
@@ -129,13 +132,21 @@ function NavBar() {
 								key={page.label}
 								onClick={handleCloseNavMenu}
 								sx={{ my: 2, color: "white", display: "block" }}>
-								<Link to={page.link}>{page.label}</Link>
+								<Link
+									style={{ color: "white", textDecoration: "none" }}
+									to={page.link}>
+									{page.label}
+								</Link>
 							</Button>
 						))}
 					</Box>
 
 					<Box sx={{ flexGrow: 0 }}>
-						<Cart cant={cant} />
+						<Link
+							style={{ color: "white", textDecoration: "none" }}
+							to={"/Checkout"}>
+							<Cart cant={cant} />
+						</Link>
 					</Box>
 				</Toolbar>
 			</Container>

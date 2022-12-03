@@ -24,8 +24,11 @@ export default function ItemDetailContainer() {
 		<div
 			style={{
 				border: "2px solid black",
-				margin: "1rem auto",
+				margin: "5rem auto",
+				alignItems: "center",
 				padding: "1rem",
+				width: "300px",
+				height: "280px",
 			}}>
 			<ItemDetail producto={producto} />
 		</div>

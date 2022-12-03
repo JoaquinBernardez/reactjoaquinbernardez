@@ -8,6 +8,8 @@ export default function ItemList({ productos }) {
 				border: "3px solid ",
 				margin: "2rem",
 				display: "flex",
+				flexWrap: "wrap",
+				justifyContent: "center",
 			}}>
 			{!productos.length && "Cargando productos..."}
 			{productos.map((item) => (

@@ -20,6 +20,12 @@ export default function ItemDetail({ producto }) {
 					Categoria: {producto.categoria}
 					<br />
 					Precio: {producto.precio}
+					<br />
+					<img
+						style={{ width: "200px", margin: "1rem auto" }}
+						src={producto.imgUrl}
+						alt=""
+					/>
 					<ItemCounter
 						stock={producto.stock}
 						initial={1}
