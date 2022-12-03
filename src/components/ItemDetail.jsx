@@ -12,6 +12,8 @@ export default function ItemDetail({ producto }) {
 		<div
 			style={{
 				textAlign: "center",
+				textDecoration: "none",
+				color: "black",
 			}}>
 			{producto.id ? (
 				<>

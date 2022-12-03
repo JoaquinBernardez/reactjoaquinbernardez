@@ -2,36 +2,76 @@ import React from "react";
 import { contextoGeneral } from "./ContextContainer";
 import { useContext } from "react";
 import { useEffect } from "react";
-import { Container, Typography } from "@mui/material";
+import { Button, Container, Typography } from "@mui/material";
+import DeleteIcon from "@mui/icons-material/Delete";
 
 export default function ItemCarrito() {
-	const { carrito } = useContext(contextoGeneral);
+	const { carrito, removeItem, clear } = useContext(contextoGeneral);
 	useEffect(() => {}, [carrito]);
 
 	return (
-		<div
+		<Container
 			style={{
 				display: "flex",
+				alignItems: "center",
 			}}>
+			{!carrito.length && (
+				<Container
+					style={{
+						display: "flex",
+						background: "rgba(0, 0, 0, 0.06)",
+						margin: "2rem",
+						padding: "1.3rem",
+						flexDirection: "column",
+						borderRadius: "10px",
+					}}>
+					<Typography variant="h6">Su carrito se encuentra vacio</Typography>
+				</Container>
+			)}
 			{carrito.map((producto) => (
-				<div
+				<Container
 					style={{
 						display: "flex",
 						background: "rgba(0, 0, 0, 0.06)",
 						margin: "1rem",
 						padding: "1rem",
+						flexDirection: "column",
+						borderRadius: "10px",
 					}}>
-					Producto: {producto.nombre}
-					<br />
-					Categoria: {producto.categoria}
-					<br />
-					Precio por unidad: ${producto.precio}
-					<br />
-					Cantidad: {producto.quantity}
-					<br />
-					Precio total: ${producto.precio * producto.quantity}
-				</div>
+					<Typography variant="h6">Producto: {producto.nombre}</Typography>
+					<Typography variant="body1">
+						Categoria: {producto.categoria}
+					</Typography>
+					<Typography variant="body1">
+						Precio por unidad: ${producto.precio}
+					</Typography>
+					<Typography variant="body1">Cantidad: {producto.quantity}</Typography>
+					<Typography variant="body1">
+						Precio total: ${producto.precio * producto.quantity}
+					</Typography>
+					<Button onClick={() => removeItem(producto.id)}>
+						Borrar producto
+					</Button>
+				</Container>
 			))}
-		</div>
+			{carrito.length ? (
+				<Button
+					sx={{ height: "fit-content", minWidth: "fit-content" }}
+					variant="outlined"
+					color="error"
+					onClick={() => clear()}
+					startIcon={<DeleteIcon />}>
+					Vaciar
+				</Button>
+			) : (
+				<Button
+					sx={{ height: "fit-content", minWidth: "fit-content" }}
+					variant="outlined"
+					disabled
+					startIcon={<DeleteIcon />}>
+					Vaciar
+				</Button>
+			)}
+		</Container>
 	);
 }

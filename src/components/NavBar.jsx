@@ -40,7 +40,7 @@ function NavBar() {
 
 	return (
 		<AppBar position="static">
-			<Container maxWidth="xl">
+			<Container maxWidth="xl" sx={{ background: "grey" }}>
 				<Toolbar disableGutters>
 					<PaddingIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />
 					<Typography
