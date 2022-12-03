@@ -11,10 +11,6 @@ export default function Footer() {
 				display: "flex",
 				background: "grey",
 				justifyContent: "end",
-				width: "100vw",
-				position: "absolute",
-				bottom: "0",
-				right: "0",
 				padding: "1rem",
 			}}>
 			<Facebook sx={{ color: "#fff", paddingInline: "5px" }} />

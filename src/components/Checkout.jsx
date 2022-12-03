@@ -1,50 +1,69 @@
 import { Button, TextField } from "@mui/material";
 import React, { useContext } from "react";
-import { useEffect } from "react";
 import { useState } from "react";
 import { contextoGeneral } from "./ContextContainer";
 import ItemCarrito from "./ItemCarrito";
+import { Container, Typography, Box } from "@mui/material";
+import { useNavigate } from "react-router-dom";
+import {
+	addDoc,
+	collection,
+	getFirestore,
+	updateDoc,
+	doc,
+} from "firebase/firestore";
+import { increment } from "firebase/firestore";
 
 export default function Checkout() {
-	const { carrito, totalAPagar } = useContext(contextoGeneral);
-	const [nombresProductos, setNombresProductos] = useState([]);
+	const { carrito, totalAPagar, clear } = useContext(contextoGeneral);
 	const [nombre, setNombre] = useState("");
 	const [tel, setTel] = useState("");
 	const [email, setEmail] = useState("");
+	const navigate = useNavigate();
 
-	function cambioDeNombre() {
-		let nombres = carrito.map((item) => item.nombre);
-		setNombresProductos(nombres);
+	function handleClickComprar() {
+		const pedido = {
+			comprador: { nombre, tel, email },
+			items: carrito,
+			total: totalAPagar,
+		};
+
+		const database = getFirestore();
+		const pedidos = collection(database, "pedidos");
+		addDoc(pedidos, pedido).then((miPedido) => {
+			console.log(miPedido.id);
+			carrito.forEach((item) => {
+				const documento = doc(database, "productos", item.id);
+				updateDoc(documento, { stock: increment(-item.quantity) });
+			});
+			clearInfo();
+			success();
+		});
 	}
-	useEffect(() => {
-		cambioDeNombre();
-	}, [carrito]);
-	function botonComprar() {
-		cambioDeNombre();
-		alert(
-			nombre +
-				" " +
-				tel +
-				" " +
-				email +
-				" quiere comprar " +
-				nombresProductos +
-				" total a pagar $" +
-				totalAPagar
-		);
+	function clearInfo() {
+		setTel("");
+		setEmail("");
+		setNombre("");
+		clear();
+	}
+	function success() {
+		navigate("/productosComprados");
+		setTimeout(() => {
+			navigate("/");
+		}, 2500);
 	}
 	return (
-		<div
+		<Container
 			style={{
 				display: "flex",
 				flexDirection: "column",
 				alignItems: "center",
 			}}>
-			<div style={{ display: "flex" }}>
+			<Box style={{ display: "flex" }}>
 				<ItemCarrito />
-			</div>
-			<div>Total a pagar: ${totalAPagar} </div>
-			<div>
+			</Box>
+			<Typography>Total a pagar: ${totalAPagar} </Typography>
+			<Box>
 				<TextField
 					onChange={(e) => setNombre(e.target.value)}
 					id="filled-basic"
@@ -67,10 +86,16 @@ export default function Checkout() {
 					variant="filled"
 					value={email}
 				/>
-				<Button onClick={botonComprar} value="Buy" variant="contained">
-					Buy
-				</Button>
-			</div>
-		</div>
+				{carrito.length ? (
+					<Button onClick={handleClickComprar} value="Buy" variant="contained">
+						Comprar
+					</Button>
+				) : (
+					<Button variant="contained" disabled>
+						Comprar
+					</Button>
+				)}
+			</Box>
+		</Container>
 	);
 }

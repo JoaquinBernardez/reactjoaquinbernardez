@@ -5,10 +5,10 @@ export default function ItemList({ productos }) {
 	return (
 		<div
 			style={{
-				border: "3px solid ",
 				margin: "2rem",
 				display: "flex",
 				flexWrap: "wrap",
+				width: "100%",
 				justifyContent: "center",
 			}}>
 			{!productos.length && "Cargando productos..."}

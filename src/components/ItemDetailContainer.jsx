@@ -3,7 +3,6 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { doc, getDoc, getFirestore } from "firebase/firestore";
 import ItemDetail from "./ItemDetail";
-import { misProductos } from "./productos";
 
 export default function ItemDetailContainer() {
 	const { iditem } = useParams();

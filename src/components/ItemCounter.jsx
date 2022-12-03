@@ -22,7 +22,11 @@ export default function ItemCounter({ stock, initial, agregarAlCarrito }) {
 			<Button onClick={onMenos}>-</Button>
 			<Typography>{count}</Typography>
 			<Button onClick={onAdd}>+</Button>
-			<Button onClick={() => agregarAlCarrito(count)}>AGREGAR</Button>
+			{stock ? (
+				<Button onClick={() => agregarAlCarrito(count)}>AGREGAR</Button>
+			) : (
+				<Button disabled>AGREGAR</Button>
+			)}
 		</Container>
 	);
 }
