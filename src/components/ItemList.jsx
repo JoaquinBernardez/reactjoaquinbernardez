@@ -1,9 +1,10 @@
+import { Box } from "@mui/material";
 import React from "react";
 import Item from "./Item";
 
 export default function ItemList({ productos }) {
 	return (
-		<div
+		<Box
 			style={{
 				margin: "2rem",
 				display: "flex",
@@ -15,6 +16,6 @@ export default function ItemList({ productos }) {
 			{productos.map((item) => (
 				<Item item={item} />
 			))}
-		</div>
+		</Box>
 	);
 }

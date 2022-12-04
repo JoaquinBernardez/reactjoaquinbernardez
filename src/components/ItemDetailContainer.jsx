@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { doc, getDoc, getFirestore } from "firebase/firestore";
 import ItemDetail from "./ItemDetail";
+import { Box } from "@mui/material";
 
 export default function ItemDetailContainer() {
 	const { iditem } = useParams();
@@ -20,16 +21,15 @@ export default function ItemDetailContainer() {
 	}, [iditem]);
 
 	return (
-		<div
-			style={{
-				border: "2px solid black",
-				margin: "5rem auto",
+		<Box
+			sx={{
+				margin: "10px",
+				height: "75vh",
+				display: "flex",
+				justifyContent: "center",
 				alignItems: "center",
-				padding: "1rem",
-				width: "300px",
-				height: "280px",
 			}}>
 			<ItemDetail producto={producto} />
-		</div>
+		</Box>
 	);
 }

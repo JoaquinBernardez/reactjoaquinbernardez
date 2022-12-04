@@ -9,21 +9,24 @@ import MenuIcon from "@mui/icons-material/Menu";
 import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
 import MenuItem from "@mui/material/MenuItem";
-import PaddingIcon from "@mui/icons-material/Padding";
-import Cart from "./CartWidget";
+import { grey } from "@mui/material/colors";
+import CartWidget from "./CartWidget";
 import { contextoGeneral } from "../components/ContextContainer";
 import { Link } from "react-router-dom";
 
 const pages = [
-	{ label: "Home", link: "/" },
-	{ label: "Servicios", link: "/servicios" },
+	{ label: "Inicio", link: "/" },
 	{ label: "Deportes", link: "/categoria/Deportes" },
 	{ label: "Electronica", link: "/categoria/Electronica" },
+	{ label: "Mi Compra", link: "/pedidos" },
 ];
 
-function NavBar() {
+export default function Navbar() {
 	const { carrito } = React.useContext(contextoGeneral);
+	const navBackground = grey[900];
+
 	const [cant, setCant] = React.useState(0);
+
 	React.useEffect(() => {
 		setCant(carrito.reduce((acc, item) => acc + item.quantity, 0));
 	}, [carrito]);
@@ -39,12 +42,11 @@ function NavBar() {
 	};
 
 	return (
-		<AppBar position="static">
-			<Container maxWidth="xl" sx={{ background: "grey" }}>
+		<AppBar position="static" sx={{ backgroundColor: `${navBackground}` }}>
+			<Container maxWidth="xl">
 				<Toolbar disableGutters>
-					<PaddingIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />
 					<Typography
-						variant="h4"
+						variant="h1"
 						noWrap
 						component="a"
 						href="/"
@@ -54,7 +56,9 @@ function NavBar() {
 							fontFamily: "monospace",
 							fontWeight: 700,
 							letterSpacing: ".3rem",
-							color: "#fff",
+							color: "inherit",
+							textDecoration: "none",
+							fontSize: "3em",
 						}}>
 						JCompany
 					</Typography>
@@ -90,7 +94,7 @@ function NavBar() {
 								<MenuItem key={page.label} onClick={handleCloseNavMenu}>
 									<Typography textAlign="center">
 										<Link
-											style={{ color: "white", textDecoration: "none" }}
+											style={{ textDecoration: "none", color: "#111" }}
 											to={page.link}>
 											{page.label}
 										</Link>
@@ -99,7 +103,6 @@ function NavBar() {
 							))}
 						</Menu>
 					</Box>
-					<PaddingIcon sx={{ display: { xs: "flex", md: "none" }, mr: 1 }} />
 					<Typography
 						variant="h5"
 						noWrap
@@ -120,12 +123,9 @@ function NavBar() {
 					<Box
 						sx={{
 							flexGrow: 1,
-							display: {
-								xs: "none",
-								md: "flex",
-								justifyContent: "end",
-								paddingRight: "1.2rem",
-							},
+							display: { xs: "none", md: "flex" },
+							justifyContent: "end",
+							paddingRight: "2rem",
 						}}>
 						{pages.map((page) => (
 							<Button
@@ -133,19 +133,18 @@ function NavBar() {
 								onClick={handleCloseNavMenu}
 								sx={{ my: 2, color: "white", display: "block" }}>
 								<Link
-									style={{ color: "white", textDecoration: "none" }}
+									style={{ textDecoration: "none", color: "#fff" }}
 									to={page.link}>
 									{page.label}
 								</Link>
 							</Button>
 						))}
 					</Box>
-
-					<Box sx={{ flexGrow: 0 }}>
+					<Box>
 						<Link
 							style={{ color: "white", textDecoration: "none" }}
 							to={"/Checkout"}>
-							<Cart cant={cant} />
+							<CartWidget cant={cant} />
 						</Link>
 					</Box>
 				</Toolbar>
@@ -153,4 +152,3 @@ function NavBar() {
 		</AppBar>
 	);
 }
-export default NavBar;

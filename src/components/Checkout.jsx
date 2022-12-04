@@ -15,7 +15,8 @@ import {
 import { increment } from "firebase/firestore";
 
 export default function Checkout() {
-	const { carrito, totalAPagar, clear } = useContext(contextoGeneral);
+	const { carrito, totalAPagar, clear, setPedidos } =
+		useContext(contextoGeneral);
 	const [nombre, setNombre] = useState("");
 	const [tel, setTel] = useState("");
 	const [email, setEmail] = useState("");
@@ -27,13 +28,14 @@ export default function Checkout() {
 			items: carrito,
 			total: totalAPagar,
 		};
+		setPedidos(localStorage.setItem("pedidos", JSON.stringify(pedido)));
 
 		const database = getFirestore();
 		const pedidos = collection(database, "pedidos");
 		addDoc(pedidos, pedido).then((miPedido) => {
 			console.log(miPedido.id);
 			carrito.forEach((item) => {
-				const documento = doc(database, "productos", item.id);
+				const documento = doc(database, "Productos", item.id);
 				updateDoc(documento, { stock: increment(-item.quantity) });
 			});
 			clearInfo();

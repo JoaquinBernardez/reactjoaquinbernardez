@@ -1,10 +1,14 @@
 import React, { useState, createContext, useEffect } from "react";
 
 export const contextoGeneral = createContext();
-
 export default function ContextContainer({ children }) {
-	const [carrito, setCarrito] = useState([]);
+	const [carrito, setCarrito] = useState(
+		JSON.parse(localStorage.getItem("cart")) || []
+	);
 	const [totalAPagar, setTotalApagar] = useState(0);
+	const [pedidos, setPedidos] = useState(
+		JSON.parse(localStorage.getItem("pedidos")) || []
+	);
 	function posInCart(id) {
 		const pos = carrito.findIndex((item) => item.id == id);
 		return pos;
@@ -38,9 +42,21 @@ export default function ContextContainer({ children }) {
 		setTotalApagar(tot);
 	}, [carrito]);
 
+	useEffect(() => {
+		localStorage.setItem("cart", JSON.stringify(carrito));
+	}, [carrito]);
+
 	return (
 		<contextoGeneral.Provider
-			value={{ carrito, addItem, removeItem, clear, totalAPagar }}>
+			value={{
+				carrito,
+				addItem,
+				removeItem,
+				clear,
+				totalAPagar,
+				pedidos,
+				setPedidos,
+			}}>
 			{children}
 		</contextoGeneral.Provider>
 	);

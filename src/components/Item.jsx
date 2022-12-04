@@ -33,6 +33,7 @@ export default function Item({ item }) {
 				${item.precio}
 			</Typography>
 			<Link to={"/item/" + item.id}>Ir al item</Link>
+			<Typography>Stock: {item.stock}</Typography>
 			<ItemCounter
 				stock={item.stock}
 				initial={1}

@@ -4,7 +4,7 @@ import React, { useState } from "react";
 
 export default function ItemCounter({ stock, initial, agregarAlCarrito }) {
 	const [count, setCount] = useState(initial);
-
+	const chequeoStock = stock > 0;
 	const onMenos = () => {
 		if (count > 1) {
 			setCount(count - 1);
@@ -22,7 +22,7 @@ export default function ItemCounter({ stock, initial, agregarAlCarrito }) {
 			<Button onClick={onMenos}>-</Button>
 			<Typography>{count}</Typography>
 			<Button onClick={onAdd}>+</Button>
-			{stock ? (
+			{chequeoStock ? (
 				<Button onClick={() => agregarAlCarrito(count)}>AGREGAR</Button>
 			) : (
 				<Button disabled>AGREGAR</Button>

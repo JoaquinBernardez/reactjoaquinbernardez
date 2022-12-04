@@ -46,7 +46,6 @@ export default function ItemListContainer() {
 	return (
 		<Container
 			sx={{
-				width: "100vw",
 				display: "flex",
 				alignItems: "center",
 				justifyContent: "center",
@@ -56,9 +55,8 @@ export default function ItemListContainer() {
 				sx={{
 					display: "flex",
 					flexDirection: "column",
-
 					alignItems: "center",
-					width: "100%",
+					padding: "0",
 				}}>
 				<ItemList productos={productos} />
 			</Box>
